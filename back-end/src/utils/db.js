@@ -1,25 +1,23 @@
-const { MongoClient } = require('mongodb')
+const Mongoose = require('mongoose')
+const User = require('../models/user')
+const File = require('../models/file')
 
 class DBClient {
   constructor () {
     this.host = process.env.DB_HOST || 'localhost';
     this.port = process.env.DB_PORT || 27017;
-    this.database = process.env.DB_DATABASE || 'files_manager';
+    this.database = process.env.DB_DATABASE || 'YourHR';
     this.url = `mongodb://${this.host}:${this.port}`;
-    // Create a new MongoClient
-    this.client = new MongoClient(this.url, {
+
+    Mongoose.connect(`mongodb://${this.host}:${this.port}/${this.database}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    })
-    this.connected = false;
-    // Connect the client to the server
-    this.client.connect().then(() => {
-      //for isAlive function
+      useCreateIndex: true,
+    }).then(() => {
+      console.log('Mongoose connected to database')
       this.connected = true
     }).catch((err) => {
-        console.error("Mongodb not connecting")
-    }).finally(() => {
-        this.client.close()
+      console.error('Mongoose could not connect to database', err)
     })
   }
 
@@ -30,17 +28,13 @@ class DBClient {
 
   // returns the number of documents in the collection "users"
   async nbUsers () {
-    const db = this.client.db(this.database);
-    const collection = db.collection('users');
-    const count = await collection.countDocuments();
+    const count = await User.countDocuments();
     return count
   }
 
   // returns the number of documents in the collection "files"
   async nbFiles () {
-    const db = this.client.db(this.database);
-    const collection = db.collection('files');
-    const count = await collection.countDocuments();
+    const count = await File.countDocuments();
     return count
   }
 }

@@ -1,0 +1,25 @@
+.button-profile {
+  background-color: #0c4747;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  color: aliceblue;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 5rem;
+  width: 20rem;
+  text-align: center;
+}
+.button-profile:hover {
+  opacity: 70%;
+  transition-property: opacity;
+}
+.section-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}

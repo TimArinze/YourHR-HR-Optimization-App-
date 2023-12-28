@@ -1,0 +1,87 @@
+.section-header-leave {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media (max-width: 900px) {
+  .section-header-leave {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.leaveSummaryTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.leaveSummaryTitle > h3 {
+  font-size: larger;
+}
+.button-pending {
+  background-color: rgb(194, 74, 30);
+  padding: 0.5rem 2rem;
+  border-radius: 20px;
+  color: aliceblue;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 2rem;
+  width: 15rem;
+  text-align: center;
+}
+.button-pending:hover {
+  opacity: 70%;
+  transition-property: opacity;
+}
+.ApplyHolidaysContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button-apply {
+  background-color: #0c4747;
+  padding: 0.7rem 0rem;
+  border-radius: 25px;
+  color: aliceblue;
+  text-decoration: none;
+  cursor: pointer;
+  width: 12rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+.button-apply:hover {
+  opacity: 70%;
+  transition-property: opacity;
+}
+.button-holidays {
+  border: #0c4747 solid 0.1rem;
+  padding: 0.7rem 2rem;
+  border-radius: 20px;
+  color: #0c4747;
+  text-decoration: none;
+  cursor: pointer;
+  width: 12rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+.button-holidays:hover {
+  background-color: #0c4747;
+  color: aliceblue;
+  transition-property: background;
+}
+
+@media (max-width: 900px) {
+  .button-apply, .button-holidays {
+    padding-top: 0.5rem;
+  }
+  .ApplyHolidaysContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+}

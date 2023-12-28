@@ -40,14 +40,14 @@
 
 .button-apply {
   background-color: #0c4747;
-  padding: 0.7rem 0rem;
+  padding: 0.5rem 0rem;
   border-radius: 25px;
   color: aliceblue;
   text-decoration: none;
   cursor: pointer;
   width: 12rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   margin-top: 2rem;
   text-align: center;
 }
@@ -57,14 +57,14 @@
 }
 .button-holidays {
   border: #0c4747 solid 0.1rem;
-  padding: 0.7rem 2rem;
+  padding: 0.5rem 2rem;
   border-radius: 20px;
   color: #0c4747;
   text-decoration: none;
   cursor: pointer;
   width: 12rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   margin-top: 2rem;
   text-align: center;
 }
@@ -73,6 +73,25 @@
   color: aliceblue;
   transition-property: background;
 }
+.button-back {
+  border: #0c4747 solid 0.1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 20px;
+  color: #0c4747;
+  text-decoration: none;
+  cursor: pointer;
+  width: 12rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+.button-back:hover {
+  background-color: #0c4747;
+  color: aliceblue;
+  transition-property: background;
+}
+
 
 @media (max-width: 900px) {
   .button-apply, .button-holidays {

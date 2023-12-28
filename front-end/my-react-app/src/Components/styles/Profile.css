@@ -1,16 +1,16 @@
 .button-profile {
   background-color: #0c4747;
-  padding: 1rem 2rem;
-  border-radius: 20px;
+  padding: 0.8rem 2rem;
+  border-radius: 1rem;
   color: aliceblue;
   display: inline-block;
   text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
   margin-top: 5rem;
   width: 20rem;
   text-align: center;
+  border: 0;
 }
 .button-profile:hover {
   opacity: 70%;

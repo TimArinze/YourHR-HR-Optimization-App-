@@ -6,8 +6,8 @@ function Profile() {
     <div>
       <main>
         <section className='section section-profile'>
-          <button href="/profile/personaldetails" className='button-profile'>Personal Details</button>
-          <button href="/profile/employmentdetails" className='button-profile'>Employment Details</button>
+          <a href="/profile/personaldetails" className='button-profile'>Personal Details</a>
+          <a href="/profile/employmentdetails" className='button-profile'>Employment Details</a>
         </section>
       </main>
     </div>

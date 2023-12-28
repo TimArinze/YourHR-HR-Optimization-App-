@@ -5,6 +5,9 @@ import Dashboard from './Dashboard'
 import Leave from './Leave'
 import Profile from './Profile'
 import LeaveSummary from './LeaveSummary'
+import ListOfHolidays from './ListOfHolidays'
+import LeaveApplication from './LeaveApplication'
+import ProfilePersonal from './ProfilePersonal'
 
 
 function Home() {
@@ -47,9 +50,11 @@ function Home() {
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/home' element={<Dashboard/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
-        <Route path='/leave' element={<Leave/>}>
-          <Route path='apply' element='A'></Route>
-          <Route path='holidays' element={<LeaveSummary/>}></Route>
+        <Route path='profile/personaldetails' element={<ProfilePersonal/>}></Route>
+        <Route path='profile/employmentdetails' element=''></Route>
+        <Route path='/leave/*' element={<Leave/>}>
+          <Route path='apply' element={<LeaveApplication/>}></Route>
+          <Route path='holidays' element={<ListOfHolidays/>}></Route>
           <Route path='pending' element={<LeaveSummary/>}></Route>
         </Route>
       </Routes>

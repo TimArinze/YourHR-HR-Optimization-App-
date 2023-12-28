@@ -1,0 +1,20 @@
+.leave-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5rem;
+}
+.leave-table th,
+.leave-table td {
+  padding: 8px;
+  text-align: center;
+  height: 60px;
+}
+.odd {
+  background-color: rgb(101, 223, 182);
+}
+.even {
+  background-color: rgb(17, 172, 120);
+}
+.leaveType {
+  font-weight: 600;
+}

@@ -1,0 +1,101 @@
+.leaveAppTitle {
+  margin: 3rem;
+  color: #011414;
+}
+.leaveForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.1rem solid #053131;
+  border-radius: 1rem;
+  object-fit: contain;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+.leave-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+.leaveFormContainer {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #011414;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.leaveFormContainer textarea {
+  border: #053131 solid 0.1rem;
+  border-radius: 0.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  width: 270px;
+}
+.leaveForm h3 {
+  margin: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #011414;
+  text-align: center;
+}
+.leave-section .leaveInputBox {
+  width: 200px;
+  height: 50px;
+  border: 0.1rem solid #053131;
+  border-radius: 0.5rem;
+  outline: none;
+  color: #053131;
+  text-align: center;
+  font-size: 1rem;
+}
+.leaveActive {
+  width: 100%;
+  display: flex;
+  display: column;
+  flex-wrap: wrap;
+}
+.attachment h3 {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.attachment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.attachment input {
+  width: 200px;
+  height: auto;
+}
+.leaveButton {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.leaveButton button {
+  height: 40px;
+  width: 200px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 1rem;
+  border: 0;
+  font-size: 1rem;
+}
+#leaveapply {
+  background-color: limegreen;
+}
+#leavecancel {
+  background-color: red;
+}

@@ -49,7 +49,7 @@ function Login() {
           </form>
           <footer className='footer'>
           <div className='row'>
-            <ul class="social nav">
+            <ul class="social-nav">
               <li class="social-item nav-item">
                 <a href="https://facebook.com/timothy.arinze.5/" class="social-link">
                   <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="25px" height="25px">
@@ -90,13 +90,13 @@ function Login() {
             <div class="col-1-2">
               <ul className="footer-nav nav">
                 <li className="footer-nav-item nav-item">
-                  <a href="" className="footer-nav-link"><small>Terms of Use</small></a>
+                  <a href="/" className="footer-nav-link"><small>Terms of Use</small></a>
                 </li>
                 <li class="footer-nav-item nav-item">
-                  <a href="" className="footer-nav-link"><small>Privacy Policy</small></a>
+                  <a href="/" className="footer-nav-link"><small>Privacy Policy</small></a>
                 </li>
                 <li className="footer-nav-item nav-item">
-                  <a href="" className="footer-nav-link"><small>Cookie Policy</small></a>
+                  <a href="/" className="footer-nav-link"><small>Cookie Policy</small></a>
                 </li>
               </ul>
             </div>

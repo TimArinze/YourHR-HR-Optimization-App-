@@ -8,6 +8,7 @@ class DBClient {
     this.port = process.env.DB_PORT || 27017;
     this.database = process.env.DB_DATABASE || 'YourHR';
     this.url = `mongodb://${this.host}:${this.port}`;
+    this.connected = false;
 
     Mongoose.connect(`mongodb://${this.host}:${this.port}/${this.database}`, {
       useNewUrlParser: true,

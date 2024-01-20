@@ -46,13 +46,16 @@ function Home() {
         </div>
       </header>
       <Routes>
-        <Route path='/' element={<Dashboard/>}></Route>
+        <Route path='*' element={<Dashboard/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/home' element={<Dashboard/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='profile/personaldetails' element={<ProfilePersonal/>}></Route>
         <Route path='profile/employmentdetails' element=''></Route>
         <Route path='/leave/*' element={<Leave/>}>
+          <Route index element={<LeaveSummary/>} />
+          <Route path='apply' element={<LeaveApplication/>} />
+          <Route path='holidays' element={<ListOfHolidays/>} />
         </Route>
       </Routes>
     </div>

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
-    "start": "node server.js",
+    "start": "nodemon src/server.js",
     "start-worker": "nodemon --exec babel-node --presets @babel/preset-env ./src/worker.js",
     "dev": "nodemon server.js",
     "test": "mocha --require@babel/register --exit \"tests/*.test.js\""

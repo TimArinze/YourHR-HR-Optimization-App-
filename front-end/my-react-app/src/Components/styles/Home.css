@@ -77,6 +77,16 @@ h1, h2, h3, h4, h5, h6 {
 .header-logo h1 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+.header-logo p {
+  font-family: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: .04rem;
+  margin: 0;
+  padding-bottom: 1rem;
+  padding-left: 0.5rem;
+  color: aliceblue;
+}
 .menu-btn {
   height: 40px;
   width: 40px;

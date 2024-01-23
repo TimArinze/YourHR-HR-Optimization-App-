@@ -1,16 +1,12 @@
 import React from 'react'
 import './styles/Home.css'
-import { Route, Routes } from 'react-router-dom'
-import Dashboard from './Dashboard'
-import Leave from './Leave'
-import Profile from './Profile'
-import LeaveSummary from './LeaveSummary'
-import ListOfHolidays from './ListOfHolidays'
-import LeaveApplication from './LeaveApplication'
-import ProfilePersonal from './ProfilePersonal'
+import { Outlet } from 'react-router-dom'
+import { useAuth } from '../Utils/auth'
 
 
 function Home() {
+  const auth = useAuth();
+  const token = auth.token;
   return (
     <div className='body'>
       <header className='header'>
@@ -19,6 +15,7 @@ function Home() {
             <a href='/'>
               <h1>YourHR</h1>
             </a>
+            <p>Welcome, {token} </p>
           </div>
           <input className='menu-btn' type='checkbox' id='menu-btn' />
           <label className='menu-icon' htmlFor='menu-btn'>
@@ -36,28 +33,13 @@ function Home() {
                 <a href='/leave' className='nav-link'>Leave</a>
               </li>
               <li className='nav-item'>
-                <a href='/payroll' className='nav-link'>Payroll</a>
-              </li>
-              <li className='nav-item'>
                 <a href='/helpdesk' className='nav-link'>Help Desk</a>
               </li>
             </ul>
           </nav>
         </div>
       </header>
-      <Routes>
-        <Route path='*' element={<Dashboard/>}></Route>
-        <Route path='/dashboard' element={<Dashboard/>}></Route>
-        <Route path='/home' element={<Dashboard/>}></Route>
-        <Route path='/profile' element={<Profile/>}></Route>
-        <Route path='profile/personaldetails' element={<ProfilePersonal/>}></Route>
-        <Route path='profile/employmentdetails' element=''></Route>
-        <Route path='/leave/*' element={<Leave/>}>
-          <Route index element={<LeaveSummary/>} />
-          <Route path='apply' element={<LeaveApplication/>} />
-          <Route path='holidays' element={<ListOfHolidays/>} />
-        </Route>
-      </Routes>
+      <Outlet />
     </div>
   )
 }

@@ -8,44 +8,29 @@ import ListOfHolidays from './Components/ListOfHolidays'
 import LeaveApplication from './Components/LeaveApplication'
 import ProfilePersonal from './Components/ProfilePersonal'
 import Registration from './Components/Registration'
-import { useEffect, useState } from 'react'
-
+import Dashboard from './Components/Dashboard'
+import { AuthProvider } from './Utils/auth'
 
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setLoggedIn(true);
-    }
-  }, [])
   return (
-    <div>
+    <AuthProvider>
       <Routes>
-        {!isLoggedIn && <Route path="/*" element={<Login setLoggedIn={setLoggedIn} />} />}
-        {isLoggedIn ? (
-          <>
-            <Route path="/" element={<Home />}>
-              <Route path="leave" element={<Leave />}>
-                <Route index element={<LeaveSummary />} />
-                <Route path="apply" element={<LeaveApplication />} />
-                <Route path="holidays" element={<ListOfHolidays />} />
-              </Route>
-              <Route path="profile" element={<Profile />} />
-              <Route path="/profile/personaldetails" element={<ProfilePersonal />} />
-              <Route path="/profile/employmentdetails" element="" />
-            </Route>
-          </>
-        ) : (
-          // Login and Register routes
-          <>
-            <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
-            <Route path="/register" element={<Registration />} />
-          </>
-        )}
+        <Route path="/" element={<Home />}>
+          <Route index element={<Dashboard />} />
+          <Route path="leave" element={<Leave />}>
+            <Route index element={<LeaveSummary />} />
+            <Route path="apply" element={<LeaveApplication />} />
+            <Route path="holidays" element={<ListOfHolidays />} />
+          </Route>
+          <Route path="profile" element={<Profile />} />
+          <Route path="/profile/personaldetails" element={<ProfilePersonal />} />
+          <Route path="/profile/employmentdetails" element="" />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
       </Routes>
-    </div>
+    </AuthProvider>
   );
 }
 

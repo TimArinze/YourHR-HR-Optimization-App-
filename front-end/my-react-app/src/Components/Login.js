@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './styles/Login.css'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Utils/auth';
 
-function Login({ setLoggedIn }) {
+function Login() {
   const navigate = useNavigate();
   const inputRef = useRef(null);
 
@@ -13,6 +14,8 @@ function Login({ setLoggedIn }) {
   }, [])
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const auth = useAuth();
 
   const handleLogin = async (e) => {
     //Implement your authentication logic here.
@@ -35,10 +38,13 @@ function Login({ setLoggedIn }) {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Login failed')
       }
-      navigate('/')
       const { token } = await response.json()
-      localStorage.setItem('token', token)
-      setLoggedIn(true);
+      // auth.login(token)
+      // console.log(token)
+      auth.login(token)
+      // console.log(user)
+      // localStorage.setItem('token', token) - for local storage
+      navigate('/')
     } catch (error) {
       console.error('Login failed: ', error.message)
       alert(`Login failed: ${error.message}`)

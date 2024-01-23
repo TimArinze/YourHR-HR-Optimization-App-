@@ -1,9 +1,7 @@
 import React from 'react'
 import './styles/Leave.css'
-import { Routes, Route, Link } from 'react-router-dom';
-import LeaveSummary from './LeaveSummary';
-import LeaveApplication from './LeaveApplication';
-import ListOfHolidays from './ListOfHolidays';
+import { Link, Outlet } from 'react-router-dom';
+
 
 function Leave() {
   var currentDate = new Date()
@@ -17,18 +15,14 @@ function Leave() {
             <h3>Your Leave Balance as of {formattedDate}</h3>
             <Link to='/leave/request/pending' className='button-pending'>Pending Requests ({})</Link>
           </div>
-          <div className='ApplyHolidaysContainer'>
+          <nav className='ApplyHolidaysContainer'>
             <Link to='/leave/holidays' className='button-holidays'>List of Holidays</Link>
             <Link to='/leave/apply' className='button-apply'>Apply for Leave</Link>
             <Link to='/leave' className='button-back'>Summary</Link>
-          </div>
+          </nav>
         </section>
         <section className='section section-leave'>
-          <Routes>
-            <Route path='/' element={<LeaveSummary/> }></Route>
-            <Route path='apply' element={<LeaveApplication/>}></Route>
-            <Route path='holidays' element={<ListOfHolidays/>}></Route>
-          </Routes>
+          <Outlet />
         </section>
       </main>
     </div>

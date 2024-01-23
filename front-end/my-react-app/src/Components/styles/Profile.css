@@ -16,6 +16,9 @@
   opacity: 70%;
   transition-property: opacity;
 }
+#logout {
+  background-color: rgb(146, 13, 40);
+}
 .section-profile {
   display: flex;
   flex-direction: column;

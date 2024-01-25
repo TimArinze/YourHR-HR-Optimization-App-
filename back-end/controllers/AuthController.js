@@ -18,18 +18,25 @@ class AuthController {
     if (!email || !password) {
       return res.status(401).json({error: "Unauthorized"});
     }
-    const user = await User.findOne({email});
-    const hashedPassword = user.password;
-    const isPasswordCorrect = await bcrypt.compare(password, hashedPassword);
-    if (!isPasswordCorrect) {
-      return res.status(401).json({error: "Unauthorized"});
+    try {
+      const user = await User.findOne({email});
+      if (!user) {
+        return res.status(401).json({error: "User not found"})
+      }
+      const hashedPassword = user.password;
+      const isPasswordCorrect = await bcrypt.compare(password, hashedPassword);
+      if (!isPasswordCorrect) {
+        return res.status(401).json({error: "Unauthorized"});
+      }
+      // Generating random token
+      const authToken = uuidv4()
+      const key = `auth_${authToken}`
+      await redisClient.set(`${key}`, `${user._id.toString()}`, 86400);
+      return res.status(200).json({ token: authToken});
+    } catch(err) {
+      console.log(err)
+      return res.status(401).json({error: "Unauthorized"})
     }
-    // Generating random token
-    const authToken = uuidv4()
-    const key = `auth_${authToken}`
-    await redisClient.set(`${key}`, `${user._id.toString()}`, 86400);
-    console.log(key)
-    return res.status(200).json({ token: authToken});
   }
 
   static async getDisconnect (req, res) {

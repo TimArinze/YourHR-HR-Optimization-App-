@@ -3,14 +3,15 @@ import React, { createContext, useContext, useState } from 'react'
 const AuthContext = createContext(null)
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem('token') || null)
 
-  const login = (token) => {
-    setToken(token)
+  const login = (newToken) => {
+    setToken(newToken)
   }
 
   const logout = () => {
     setToken(null)
+    localStorage.removeItem('token') // remove token from local storage
   }
 
   return (

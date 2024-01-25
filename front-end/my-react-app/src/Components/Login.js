@@ -39,15 +39,12 @@ function Login() {
         throw new Error(errorData.error || 'Login failed')
       }
       const { token } = await response.json()
-      // auth.login(token)
-      // console.log(token)
+      localStorage.setItem('token', token)
       auth.login(token)
-      // console.log(user)
-      // localStorage.setItem('token', token) - for local storage
-      navigate('/')
+      navigate('/', { replace: true })
     } catch (error) {
       console.error('Login failed: ', error.message)
-      alert(`Login failed: ${error.message}`)
+      alert(`Login failed: Incorrect username or password`)
     }
   }
   return (

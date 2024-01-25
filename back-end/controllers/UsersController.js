@@ -76,7 +76,6 @@ class UsersController {
       return res.status(401).json({error: "Unauthorized"})
     }
     const user = await User.findOne({_id: ObjectId(userID)})
-    console.log(user)
     res.json({ email: user.email,
       id: user._id,
       employeeID: user.employeeID,

@@ -10,13 +10,14 @@ import ProfilePersonal from './Components/ProfilePersonal'
 import Registration from './Components/Registration'
 import Dashboard from './Components/Dashboard'
 import { AuthProvider } from './Utils/auth'
+import { RequiredAuth } from './Utils/RequiredAuth'
 
 function App() {
 
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Home />}>
+        <Route path="/" element={<RequiredAuth><Home /></RequiredAuth>}>
           <Route index element={<Dashboard />} />
           <Route path="leave" element={<Leave />}>
             <Route index element={<LeaveSummary />} />

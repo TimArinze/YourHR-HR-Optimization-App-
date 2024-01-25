@@ -1,12 +1,29 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './styles/Home.css'
 import { Outlet } from 'react-router-dom'
-import { useAuth } from '../Utils/auth'
 
 
 function Home() {
-  const auth = useAuth();
-  const token = auth.token;
+  const token = localStorage.getItem('token');
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch('http://localhost:5000/users/me', {
+        method: 'GET',
+        headers: {
+          "X-Token": `${token}`,
+        }
+      })
+      const data = await response.json()
+      setUser(data)
+    };
+    getUser();
+  // eslint-disable-next-line
+  }, []);
+  if (!user) {
+    return <div>Loading...</div>
+  }
   return (
     <div className='body'>
       <header className='header'>
@@ -15,7 +32,7 @@ function Home() {
             <a href='/'>
               <h1>YourHR</h1>
             </a>
-            <p>Welcome, {token} </p>
+            <p>Welcome, {user.firstName} </p>
           </div>
           <input className='menu-btn' type='checkbox' id='menu-btn' />
           <label className='menu-icon' htmlFor='menu-btn'>

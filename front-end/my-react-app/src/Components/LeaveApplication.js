@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './styles/LeaveApplication.css'
 
 function LeaveApplication() {
   
   const navigate = useNavigate()
+  const inputRef = useRef(null)
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
+
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [leaveType, setLeaveType] = useState('');
+  const [leaveReason, setLeaveReason] = useState('');
+  const [attachment, setAttachment] = useState('');
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,34 +31,59 @@ function LeaveApplication() {
   }
 
   return (
-    <div>
+    <div className='LASection'>
+      <div className='LATitle'>
         <h2 className='leaveAppTitle'>Leave Application Form</h2>
-        <form onSubmit={handleSubmit} className='leaveForm'>
-          <div className='leave-section'>
-            <div className='leaveFormContainer'>
-              <h3>From Date</h3>
-              <input type="date" className='leaveInputBox'/>
-            </div>
-
-            <div className='leaveFormContainer'>
-              <h3>To Date</h3>
-              <input type='date' className='leaveInputBox'/>
-            </div>
+      </div>
+      <form onSubmit={handleSubmit} className='LeaveForm'>
+        <div className='leave-section'>
+          <div className='LA-input-box'>
+            <span className='LADetails'>From Date</span>
+              <input
+                type="date"
+                placeholder='Starting date'
+                value={fromDate}
+                required
+                onChange={e => setFromDate(e.target.value)}
+              />
           </div>
-          <div className='leave-section'>
-            <div className='leaveFormContainer'>
-              <h3>Leave Type</h3>
-              <select className='leaveInputBox'>
+          <div className='LA-input-box'>
+            <span className='LADetails'>To Date</span>
+              <input
+                type="date"
+                placeholder='Stopping date'
+                value={toDate}
+                required
+                onChange={e => setToDate(e.target.value)}
+              />
+          </div>
+          <div className='LA-input-box'>
+            <span className='LADetails'>Leave Type</span>
+              <select
+                className='LA-select-box'
+                value={leaveType}
+                required
+                onChange={e => setLeaveType(e.target.value)}
+                placeholder='Select Leave Type'
+              >
+                <option value="" disabled selected>Select Leave Type</option>
                 <option value="annual">Annual Leave</option>
                 <option value="casual">Casual Leave</option>
                 <option value="sick">Sick Leave</option>
                 <option value="prolongedsick">Prolonged Sick Leave</option>
                 <option value="maternity">Maternity Leave</option>
               </select>
-            </div>
-            <div className='leaveFormContainer'>
-              <h3>Leave Reason</h3>
-              <select className='leaveInputBox'>
+          </div>
+          <div className='LA-input-box'>
+            <span className='LADetails'>Leave Reason</span>
+              <select
+                className='LA-select-box'
+                value={leaveReason}
+                required
+                onChange={e => setLeaveReason(e.target.value)}
+                placeholder='What is the reason for your leave?'
+              >
+                <option value="" disabled selected>What is the reason for your leave?</option>
                 <option value="{}">Personal Time Off</option>
                 <option value="Travel Plans">Travel Plans</option>
                 <option value="Family Event">Family Event</option>
@@ -54,17 +91,15 @@ function LeaveApplication() {
                 <option value="emergency">Emergency</option>
                 <option value="sick">Sick</option>
               </select>
-            </div>
           </div>
-          <div className='leaveFormContainer'>
-            <h3>Message</h3>
-            <textarea rows="4"></textarea>
-          </div>
-          <br />
-          <div className='leaveActive'>
-          <div className='attachment'>
-            <h3>Add Attachment</h3>
-            <input type='file' />
+          <div className='LA-input-box'>
+            <span className="LADetails">Add Attachment</span>
+              <input
+                type='file'
+                placeholder='Add Attachment'
+                value={attachment}
+                onChange={e => setAttachment(e.target.value)}
+              />
           </div>
           <div className='leaveButton'>
             <button type='submit' id='leaveapply'>Apply</button>

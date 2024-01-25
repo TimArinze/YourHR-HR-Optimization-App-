@@ -1,6 +1,7 @@
-import React, { useNavigate } from 'react'
+import React from 'react'
 import './styles/Profile.css'
 import { useAuth } from '../Utils/auth'
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const auth = useAuth();
@@ -8,6 +9,7 @@ function Profile() {
 
   const handleLogout = () => {
     auth.logout()
+    localStorage.removeItem('token')
     navigate('/login')
   }
   return (

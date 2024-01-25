@@ -25,31 +25,7 @@ const userSchema = new mongoose.Schema({
   salary: {type: Number, required: false, trim: true, minlength: 1},
 
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-  AnnualLeave: {
-    total: {type: Number, default: 20, required: true},
-    used: {type: Number, default: 0, required: true},
-    remaining: {type: Number, default: 20, required: true},
-    requested: {type: Number, default: 0, required: true},
-  },
-  SickLeave: {
-    total: {type: Number, default: 0, required: true},
-    used: {type: Number, default: 0, required: true},
-    remaining: {type: Number, default: 0, required: true},
-    requested: {type: Number, default: 0, required: true}
-  },
-  casualLeave: {
-    total: {type: Number, default: 7, required: true},
-    used: {type: Number, default: 0, required: true},
-    requested: {type: Number, default: 0, required: true},
-    remaining: {type: Number, default: 7, required: true},
-  },
-  MaternityLeave: {
-    total: {type: Number, default: 0, required: true},
-    used: {type: Number, default: 0, required: true},
-    requested: {type: Number, default: 0, required: true},
-    remaining: {type: Number, default: 0, required: true}
-  } 
+  updatedAt: { type: Date, default: Date.now }
 });
 // format for postman;
 // '{ "email": "bob@dylan.com", "password": "toto1234!", "firstName": "bob",

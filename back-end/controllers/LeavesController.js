@@ -1,10 +1,13 @@
 const axios = require('axios');
+require('dotenv').config();
 
-class HolidaysController {
+class LeavesController {
   static async getHolidays(req, res) {
     try {
       const year = req.params.year;
-      const calender = await axios.get('https://www.googleapis.com/calendar/v3/calendars/en.ng%23holiday%40group.v.calendar.google.com/events?key=AIzaSyAUSwWUxEG3-7tam4paF7wRL65IGaVoPqE');
+      const calenderId = 'en.ng%23holiday%40group.v.calendar.google.com'
+      const apiKey = process.env.GOOGLE_CALENDAR_API_KEY;
+      const calender = await axios.get(`https://www.googleapis.com/calendar/v3/calendars/${calenderId}/events?key=${apiKey}`);
       const events = calender.data.items;
       // filter events by year
       const yearEvents = events.filter((event) => {
@@ -35,4 +38,4 @@ class HolidaysController {
   }
 }
 
-module.exports = HolidaysController;
+module.exports = LeavesController;

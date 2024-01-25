@@ -6,7 +6,7 @@ const AppController = require('../controllers/AppController');
 const UsersController = require('../controllers/UsersController');
 const AuthController = require('../controllers/AuthController');
 const FilesController = require('../controllers/FilesController');
-const HolidaysController = require('../controllers/HolidaysController');
+const LeavesController = require('../controllers/LeavesController');
 
 
 router.get('/status', AppController.getStatus);
@@ -16,6 +16,6 @@ router.get('/connect', AuthController.getConnect);
 router.get('/disconnect', AuthController.getDisconnect);
 router.get('/users/me', UsersController.getMe);
 router.post('/files', FilesController.postUpload);
-router.get('/holidays/:year', HolidaysController.getHolidays);
+router.get('/holidays/:year', LeavesController.getHolidays);
 
 module.exports = router;

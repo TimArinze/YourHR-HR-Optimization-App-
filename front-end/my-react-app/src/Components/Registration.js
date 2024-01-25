@@ -60,7 +60,7 @@ function Registration() {
         <div className='title'>
           <h1>Registration</h1>
         </div>
-        <form className='RegistrationForm' onSubmit={register}>
+        <form className="login-form" onSubmit={register}>
           <div className='user-details'>
             <div className='register-input-box'>
               <span className='details'>First Name</span>

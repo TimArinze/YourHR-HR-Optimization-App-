@@ -1,64 +1,55 @@
-.leaveAppTitle {
-  margin: 3rem;
-  color: #011414;
+.LASection {
+  width: 600px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
-.leaveForm {
+@media screen and (max-width: 600px) {
+  .LASection {
+    width: 100%;
+  }
+}
+.LeaveForm {padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  margin: auto;
+  margin-top: 50px;
+  right: 20px;
+  color: #052c2c;
+  text-align: center;
+  margin: auto 80px auto auto;
+  border-radius: 2%;
+}
+@media screen and (max-width: 600px) {
+  .LeaveForm {
+    width: 100%;
+  }
+}
+.LA-input-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  border: 0.1rem solid #053131;
-  border-radius: 1rem;
-  object-fit: contain;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1rem;
-}
-.leave-section {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 100%;
-}
-.leaveFormContainer {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #011414;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-.leaveFormContainer textarea {
-  border: #053131 solid 0.1rem;
-  border-radius: 0.5rem;
-  margin-right: auto;
-  margin-left: auto;
-  width: 270px;
-}
-.leaveForm h3 {
-  margin: 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #011414;
-  text-align: center;
-}
-.leave-section .leaveInputBox {
-  width: 200px;
-  height: 50px;
-  border: 0.1rem solid #053131;
-  border-radius: 0.5rem;
-  outline: none;
-  color: #053131;
-  text-align: center;
-  font-size: 1rem;
-}
-.leaveActive {
   width: 100%;
-  display: flex;
-  display: column;
-  flex-wrap: wrap;
+  align-items: center;
+}
+.LA-input-box input {
+  width: 80%;
+  height: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: #052c2c 1px solid;
+  border-radius: 0.5rem;
+}
+.LA-input-box select {
+  width: 80%;
+  height: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: #052c2c 1px solid;
+  border-radius: 0.5rem;
 }
 .attachment h3 {
   font-size: 0.9rem;

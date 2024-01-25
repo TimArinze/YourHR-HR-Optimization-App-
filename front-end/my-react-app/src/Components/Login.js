@@ -55,7 +55,7 @@ function Login() {
             <h2 className='section-title'>Welcome</h2>
             <p>Let's Build Tomorrow Together</p>
           </div>
-          <form id="loginForm">
+          <form id="loginForm" className="login-form">
             <input
               type="email"
               placeholder='Email' 

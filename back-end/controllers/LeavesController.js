@@ -1,5 +1,12 @@
 const axios = require('axios');
 require('dotenv').config();
+const redisClient = require('../utils/redis')
+const File = require('../models/file')
+const User = require('../models/user')
+const Leave = require('../models/leave')
+const ObjectId = require('mongodb').ObjectId;
+const fs = require('fs');
+
 
 class LeavesController {
   static async getHolidays(req, res) {
@@ -34,6 +41,32 @@ class LeavesController {
       res.status(200).json(filteredEvents);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+
+  static async postLeave (req, res) {
+    const token = req.get('X-token');
+    const key = `auth_${token}`;
+    const userID = await redisClient.get(key);
+    if (!userID) {
+      return res.status(401).json({error: 'Unauthorized'});
+    }
+    const { fromDate, toDate, leaveType, leaveReason } = req.body;
+    if (!fromDate) {
+      return res.status(400).json({error: 'Missing fromDate'})
+    }
+    if (!toDate) {
+      return res.status(400).json({error: "Missing toDate"})
+    }
+    if (!leaveType) {
+      return res.status(400).json({error: "Missing leaveType"})
+    }
+    if (!leaveReason) {
+      return res.status(400).json({error: "Missing leaveReason"})
+    }
+    const user = await User.findById(ObjectId(userID));
+    if (!user) {
+      return res.status(400).json({error: 'Unauthorized'})
     }
   }
 }

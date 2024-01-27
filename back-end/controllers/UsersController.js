@@ -1,8 +1,8 @@
-const dbClient = require('../utils/db');
 const redisClient = require('../utils/redis');
 const bcrypt = require('bcrypt');
 const ObjectId = require('mongodb').ObjectId;
 const User = require('../models/user')
+const Leave = require('../models/leave')
 
 
 class UsersController {
@@ -58,6 +58,7 @@ class UsersController {
         gender
       }
       const newUser = await User.create(user)
+      await Leave.create({ userId: newUser._id})
       return res.status(201).json({id: newUser._id, email: newUser.email})
     } catch (err) {
       if (err.code === 11000) {
@@ -65,7 +66,7 @@ class UsersController {
       }
       console.error('Error creating user: ', err);
       return res.status(500).json({error: 'Internal Server Error'})
-    }    
+    }
   }
   
   static async getMe (req, res) {

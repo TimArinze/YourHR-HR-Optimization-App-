@@ -42,6 +42,24 @@
   border: #052c2c 1px solid;
   border-radius: 0.5rem;
 }
+.LA-display-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+.LA-display-box div {
+  width: 80%;
+  height: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: #052c2c 1px solid;
+  border-radius: 0.5rem;
+}
 .LA-input-box select {
   width: 80%;
   height: 2.5rem;
@@ -85,8 +103,10 @@
   font-size: 1rem;
 }
 #leaveapply {
-  background-color: limegreen;
+  background-color: #0c4747;
+  color: aliceblue;
 }
 #leavecancel {
-  background-color: red;
+  background-color: rgb(194, 74, 30);
+  color: aliceblue;
 }

@@ -1,4 +1,3 @@
-const dbClient = require('../utils/db');
 const redisClient = require('../utils/redis');
 const File = require('../models/file');
 const User = require('../models/user')

@@ -17,5 +17,6 @@ router.get('/disconnect', AuthController.getDisconnect);
 router.get('/users/me', UsersController.getMe);
 router.post('/files', FilesController.postUpload);
 router.get('/holidays/:year', LeavesController.getHolidays);
+router.post('/leave/apply', LeavesController.postLeave);
 
 module.exports = router;

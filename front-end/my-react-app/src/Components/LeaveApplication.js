@@ -15,6 +15,7 @@ function LeaveApplication() {
 
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
+  const [daysCount, setDaysCount] = useState(0);
   const [leaveType, setLeaveType] = useState('');
   const [leaveReason, setLeaveReason] = useState('');
   const [attachment, setAttachment] = useState('');
@@ -29,6 +30,46 @@ function LeaveApplication() {
     // Use history.push to navigate a to different route
     navigate('/leave')
   }
+  const subtractWeekendsAndLeaves = (fromDate, toDate) => {
+    //Ensuring that the input is valid date objects
+     if (!(fromDate instanceof Date) || !(toDate instanceof Date)) {
+       throw new Error('Both fromDate and toDate must be valid Date objects')
+     }
+    // Ensuring fromDate is before toDate
+    if (fromDate > toDate) {
+      alert('Start Date must be before End Date')
+    }
+    // Initializing
+    let weekdaysCount = 0
+
+    let currentDate = new Date(fromDate);
+    while (currentDate <= toDate) {
+      // checking if the current day is a weekday (Monday to Friday)
+      if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
+        weekdaysCount++;
+      }
+
+      // Move to the next day
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return weekdaysCount;
+  }
+  useEffect (() => {
+    try {
+      // Parsing fromDate and toDate as Date objects
+      const startDate = new Date(fromDate);
+      const endDate = new Date(toDate);
+
+      // checking if either date is not valid
+      if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+        throw new Error('Invalid date format');
+      }
+      const numbers = subtractWeekendsAndLeaves(startDate, endDate);
+      setDaysCount(numbers);
+    } catch (error) {
+      console.error('Error calculating weeksdays:', error.message)
+    }
+  }, [fromDate, toDate])
 
   return (
     <div className='LASection'>
@@ -38,7 +79,7 @@ function LeaveApplication() {
       <form onSubmit={handleSubmit} className='LeaveForm'>
         <div className='leave-section'>
           <div className='LA-input-box'>
-            <span className='LADetails'>From Date</span>
+            <span className='LADetails'>Start Date</span>
               <input
                 type="date"
                 placeholder='Starting date'
@@ -48,7 +89,7 @@ function LeaveApplication() {
               />
           </div>
           <div className='LA-input-box'>
-            <span className='LADetails'>To Date</span>
+            <span className='LADetails'>End Date</span>
               <input
                 type="date"
                 placeholder='Stopping date'
@@ -56,6 +97,10 @@ function LeaveApplication() {
                 required
                 onChange={e => setToDate(e.target.value)}
               />
+          </div>
+          <div className='LA-display-box'>
+            <span className='LADetails'>Numbers of days to be deducted</span>
+            <div className='LA-display-box'>{daysCount}</div>
           </div>
           <div className='LA-input-box'>
             <span className='LADetails'>Leave Type</span>

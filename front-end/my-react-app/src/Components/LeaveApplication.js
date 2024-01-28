@@ -19,6 +19,9 @@ function LeaveApplication() {
   const [leaveType, setLeaveType] = useState('');
   const [leaveReason, setLeaveReason] = useState('');
   const [attachment, setAttachment] = useState('');
+  const [holidays, setHolidays] = useState([]);
+  const [year] = useState(new Date().getFullYear());
+
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +33,34 @@ function LeaveApplication() {
     // Use history.push to navigate a to different route
     navigate('/leave')
   }
+  useEffect(() => {
+    let firstDate = new Date(fromDate);
+    let lastDate = new Date(toDate);
+    if (firstDate.getFullYear() !== lastDate.getFullYear()) {
+      // eslint-disable-next-line
+      Promise.all([
+        fetch(`http://localhost:5000/holidays/${year}`, { cache: "no-store"}),
+        fetch(`http://localhost:5000/holidays/${year + 1}`, { cache: "no-store"})
+      ])
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(([data1, data2]) => setHolidays([...data1, ...data2]))
+        .catch(err => console.log(err));
+    }
+    else {
+      // eslint-disable-next-line
+      fetch(`http://localhost:5000/holidays/${year}`, { cache: "no-store"})
+        .then(res => res.json())
+        .then(data => setHolidays(data))
+        .catch(err => console.log(err));
+    }
+  }, [fromDate, toDate, year]);
+  
+  const holidaysBetweenDates = holidays.filter(holidays => {
+    const holidayDate = new Date(holidays.date);
+    return holidayDate >= new Date(fromDate) && holidayDate <= new Date(toDate);
+  })
+  const holidaysCount = holidaysBetweenDates.length;
+
   const subtractWeekendsAndLeaves = (fromDate, toDate) => {
     //Ensuring that the input is valid date objects
      if (!(fromDate instanceof Date) || !(toDate instanceof Date)) {
@@ -65,11 +96,12 @@ function LeaveApplication() {
         throw new Error('Invalid date format');
       }
       const numbers = subtractWeekendsAndLeaves(startDate, endDate);
-      setDaysCount(numbers);
+      const netDays = numbers - holidaysCount;
+      setDaysCount(netDays);
     } catch (error) {
       console.error('Error calculating weeksdays:', error.message)
     }
-  }, [fromDate, toDate])
+  }, [fromDate, toDate, holidaysCount])
 
   return (
     <div className='LASection'>

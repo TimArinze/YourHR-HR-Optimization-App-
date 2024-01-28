@@ -14,7 +14,7 @@ const leaveSchema = new mongoose.Schema({
     remaining: {type: Number, default: 0, required: true},
     requested: {type: Number, default: 0, required: true}
   },
-  casualLeave: {
+  CasualLeave: {
     total: {type: Number, default: 7, required: true},
     used: {type: Number, default: 0, required: true},
     requested: {type: Number, default: 0, required: true},

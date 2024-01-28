@@ -7,12 +7,8 @@ function LeaveApplication() {
   const navigate = useNavigate()
   const inputRef = useRef(null)
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [])
-
+  const token = localStorage.getItem('token');
+  const [user, setUser] = useState(null);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [daysCount, setDaysCount] = useState(0);
@@ -21,14 +17,60 @@ function LeaveApplication() {
   const [attachment, setAttachment] = useState('');
   const [holidays, setHolidays] = useState([]);
   const [year] = useState(new Date().getFullYear());
+  
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/users/me', {
+          method: 'GET',
+          headers: {
+            "X-Token": `${token}`,
+          },
+        });
+      
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.error('Error fetching user data:', error.message)
+      }
+    };
+    getUser();
+  // eslint-disable-next-line
+  }, []);
+  const isMale = user?.gender === 'Male';
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Implent logic for submitting the form
-    // For now, just close the modal
+    // Implementing logic for submitting the form
+    try {
+      const response = await fetch('http://localhost:5000/leave/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "X-token": `${token}`
+        },
+        body: JSON.stringify({ daysCount, leaveType })
+      });
+      if (!response.ok) {
+        const err = await response.json()
+        throw new Error(err.error || 'Application failed')
+      }
+      alert('Application successful')
+    } catch (error) {
+      console.error('Login failed', error.message)
+      alert("Application failed")
+    }
   };
-
   const handleCancel = () => {
     // Use history.push to navigate a to different route
     navigate('/leave')
@@ -147,8 +189,7 @@ function LeaveApplication() {
                 <option value="annual">Annual Leave</option>
                 <option value="casual">Casual Leave</option>
                 <option value="sick">Sick Leave</option>
-                <option value="prolongedsick">Prolonged Sick Leave</option>
-                <option value="maternity">Maternity Leave</option>
+                {!isMale && <option value="maternity">Maternity Leave</option>}
               </select>
           </div>
           <div className='LA-input-box'>

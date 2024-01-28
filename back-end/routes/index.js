@@ -18,5 +18,6 @@ router.get('/users/me', UsersController.getMe);
 router.post('/files', FilesController.postUpload);
 router.get('/holidays/:year', LeavesController.getHolidays);
 router.post('/leave/apply', LeavesController.postLeave);
+router.get('/leave/summary', LeavesController.getLeave);
 
 module.exports = router;

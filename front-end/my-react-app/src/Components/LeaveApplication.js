@@ -7,7 +7,6 @@ function LeaveApplication() {
   const navigate = useNavigate()
   const inputRef = useRef(null)
 
-  const token = localStorage.getItem('token');
   const [user, setUser] = useState(null);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
@@ -17,6 +16,11 @@ function LeaveApplication() {
   const [attachment, setAttachment] = useState('');
   const [holidays, setHolidays] = useState([]);
   const [year] = useState(new Date().getFullYear());
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    navigate('/login')
+  }
   
   useEffect(() => {
     const getUser = async () => {

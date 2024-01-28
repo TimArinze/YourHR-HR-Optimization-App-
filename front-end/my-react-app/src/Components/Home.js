@@ -1,26 +1,40 @@
 import React, {useState, useEffect} from 'react'
 import './styles/Home.css'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 
 function Home() {
+  const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  if (!token) {
+    navigate('/login')
+  }
   const [user, setUser] = useState(null);
   
   useEffect(() => {
     const getUser = async () => {
-      const response = await fetch('http://localhost:5000/users/me', {
-        method: 'GET',
-        headers: {
-          "X-Token": `${token}`,
+      try {
+        const response = await fetch('http://localhost:5000/users/me', {
+          method: 'GET',
+          headers: {
+            "X-Token": `${token}`,
+          },
+        });
+      
+        if (!response.ok) {
+          navigate('/login')
+          localStorage.removeItem('token')
+          throw new Error('Failed to fetch user data');
         }
-      })
-      const data = await response.json()
-      setUser(data)
-    };
+        const data = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.error('Error fetching user data:', error.message)
+      }
+    }
     getUser();
   // eslint-disable-next-line
-  }, []);
+  }, [token]);
   if (!user) {
     return <div>Loading...</div>
   }

@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './styles/LeaveSummary.css'
 
 function LeaveSummary() {
-  const leaveData = [
-    { type: 'Annual Leave', requested: 5, balance: 15, total: 20 },
-    { type: 'Casual Leave', requested: 2, balance: 8, total: 10 },
-    { type: 'Sick Leave', requested: 3, balance: 7, total: 10 },
-    { type: 'Maternity Leave', requested: 12, balance: 3, total: 15 },
-  ]
   const token = localStorage.getItem('token');
   const [user, setUser] = useState(null);
+  const [leaveData, setLeaveData] = useState([]);
   
   useEffect(() => {
     const getUser = async () => {
@@ -34,6 +29,31 @@ function LeaveSummary() {
   // eslint-disable-next-line
   }, []);
   const isMale = user?.gender === 'Male';
+
+
+  useEffect(() => {
+    const getLeaveSummary = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/leave/summary', {
+          method: 'GET',
+          headers: {
+            "X-Token": `${token}`,
+          },
+        });
+      
+        if (!response.ok) {
+          throw new Error('Failed to fetch leave summary');
+        }
+        const data = await response.json();
+        setLeaveData(data);
+      } catch (error) {
+        console.error('Error fetching leave summary:', error.message)
+      }
+    }
+    getLeaveSummary();
+  // eslint-disable-next-line
+  }, []);
+
   return (
     <div>
       <table className='leave-table'>
@@ -55,7 +75,7 @@ function LeaveSummary() {
               <td>{item.total}</td>
               <td>{item.requested}</td>
               <td>{item.used}</td>
-              <td>{item.balance}</td>
+              <td>{item.remaining}</td>
             </tr>
             )
           ))}

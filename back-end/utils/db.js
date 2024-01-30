@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose')
 const User = require('../models/user')
+require('dotenv').config();
 const File = require('../models/file')
 
 class DBClient {
@@ -7,15 +8,22 @@ class DBClient {
     this.host = process.env.DB_HOST || 'localhost';
     this.port = process.env.DB_PORT || 27017;
     this.database = process.env.DB_DATABASE || 'YourHR';
-    this.url = `mongodb://${this.host}:${this.port}`;
+    this.url = process.env.MONGO_URI;
     this.connected = false;
 
-    Mongoose.connect(`mongodb://${this.host}:${this.port}/${this.database}`, {
+    // Mongoose.connect(`mongodb://${this.host}:${this.port}/${this.database}`, {
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true,
+    //   useCreateIndex: true,
+    //   useFindAndModify: false,
+    // })
+    Mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
-    }).then(() => {
+    })
+    .then(() => {
       console.log('Mongoose connected to database')
       this.connected = true
     }).catch((err) => {

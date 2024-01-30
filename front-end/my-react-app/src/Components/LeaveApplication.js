@@ -51,35 +51,6 @@ function LeaveApplication() {
       inputRef.current.focus()
     }
   }, [])
-
-  // Function to handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Implementing logic for submitting the form
-    try {
-      const response = await fetch('http://localhost:5000/leave/apply', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "X-token": `${token}`
-        },
-        body: JSON.stringify({ daysCount, leaveType })
-      });
-      if (!response.ok) {
-        const {err} = await response.json()
-        throw new Error(err.error || 'Application failed')
-      }
-      alert('Application successful')
-      navigate('/leave')
-    } catch (error) {
-      console.error('Login failed', error.message)
-      alert("Application failed")
-    }
-  };
-  const handleCancel = () => {
-    // Use history.push to navigate a to different route
-    navigate('/leave')
-  }
   useEffect(() => {
     let firstDate = new Date(fromDate);
     let lastDate = new Date(toDate);
@@ -141,9 +112,9 @@ function LeaveApplication() {
       const endDate = new Date(toDate);
 
       // checking if either date is not valid
-      if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-        throw new Error('Invalid date format');
-      }
+      // if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      //   throw new Error('Invalid date format');
+      // }
       const numbers = subtractWeekendsAndLeaves(startDate, endDate);
       const netDays = numbers - holidaysCount;
       setDaysCount(netDays);
@@ -151,6 +122,36 @@ function LeaveApplication() {
       console.error(error.message);
     }
   }, [fromDate, toDate, holidaysCount])
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Implementing logic for submitting the form
+    console.log(daysCount, leaveType)
+    try {
+      const response = await fetch('http://localhost:5000/leave/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "X-token": `${token}`
+        },
+        body: JSON.stringify({ daysCount, leaveType })
+      });
+      if (!response.ok) {
+        const {err} = await response.json()
+        throw new Error(err.error || 'Application failed')
+      }
+      alert('Application successful')
+      navigate('/leave')
+    } catch (error) {
+      console.error('Login failed', error.message)
+      alert("Application failed")
+    }
+  };
+  const handleCancel = () => {
+    // Use history.push to navigate a to different route
+    navigate('/leave')
+  }
 
   return (
     <div className='LASection'>
@@ -193,10 +194,10 @@ function LeaveApplication() {
                 placeholder='Select Leave Type'
               >
                 <option value="" disabled selected>Select Leave Type</option>
-                <option value="annual">Annual Leave</option>
-                <option value="casual">Casual Leave</option>
-                <option value="sick">Sick Leave</option>
-                {!isMale && <option value="maternity">Maternity Leave</option>}
+                <option value="AnnualLeave">Annual Leave</option>
+                <option value="CasualLeave">Casual Leave</option>
+                <option value="SickLeave">Sick Leave</option>
+                {!isMale && <option value="MaternityLeave">Maternity Leave</option>}
               </select>
           </div>
           <div className='LA-input-box'>
@@ -227,7 +228,7 @@ function LeaveApplication() {
               />
           </div>
           <div className='leaveButton'>
-            <button type='submit' id='leaveapply'>Apply</button>
+            <button type='submit' id='leaveapply' onClick={handleSubmit}>Apply</button>
             <button onClick={handleCancel} id='leavecancel'>Cancel</button>
           </div>
           </div>

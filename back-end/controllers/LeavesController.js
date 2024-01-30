@@ -68,10 +68,10 @@ class LeavesController {
       await Leave.create({ userId: newUser._id})
     }
     //calculations to be updated
-    if (leaveType === 'AnnualLeave' || 'CasualLeave' || 'MaternityLeave') {
-      const used = Number(documents.AnnualLeave.used) + Number(daysCount)
+    if (leaveType === 'AnnualLeave' || leaveType === 'CasualLeave') {
+      const used = Number(documents[leaveType].used) + Number(daysCount)
       const requested = Number(daysCount)
-      const remaining = Number(documents.AnnualLeave.total) - Number(documents.AnnualLeave.used) - requested;
+      const remaining = Number(documents[leaveType].total) - Number(documents[leaveType].used) - requested;
       const updateQuery = {
         userId: user._id,
         $set: {
@@ -79,16 +79,19 @@ class LeavesController {
           [`${leaveType}.requested`] : requested,
           [`${leaveType}.remaining`] : remaining,
           },
+          new: true
       }
+      console.log(updateQuery)
       try {
         const update = await Leave.findOneAndUpdate(updateQuery)
+        console.log(update)
         return res.status(201).json({update})
       } catch (err) {
         console.error('Error creating user: ', err);
         return res.status(500).json({error: 'Internal Server Error'})
       }
-    } else if (leaveType === 'SickLeave') {
-      const used = Number(documents.AnnualLeave.used) + Number(daysCount);
+    } else if (leaveType === 'SickLeave' || leaveType === 'MaternityLeave') {
+      const used = Number(documents[leaveType].used) + Number(daysCount);
       const total = used;
       const requested = Number(daysCount)
       const updateQuery = {
@@ -98,10 +101,10 @@ class LeavesController {
           [`${leaveType}.requested`] : requested,
           [`${leaveType}.total`] : total,
         },
-        new: true
       }
       try {
         const update = await Leave.findOneAndUpdate(updateQuery)
+        console.log(update)
         return res.status(201).json({update})
       } catch (err) {
         console.error('Error creating user: ', err);

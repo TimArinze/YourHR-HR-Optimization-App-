@@ -66,10 +66,11 @@ function LeaveApplication() {
         body: JSON.stringify({ daysCount, leaveType })
       });
       if (!response.ok) {
-        const err = await response.json()
+        const {err} = await response.json()
         throw new Error(err.error || 'Application failed')
       }
       alert('Application successful')
+      navigate('/leave')
     } catch (error) {
       console.error('Login failed', error.message)
       alert("Application failed")
@@ -90,15 +91,17 @@ function LeaveApplication() {
       ])
         .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
         .then(([data1, data2]) => setHolidays([...data1, ...data2]))
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
     }
     else {
       // eslint-disable-next-line
       fetch(`http://localhost:5000/holidays/${year}`, { cache: "no-store"})
         .then(res => res.json())
         .then(data => setHolidays(data))
-        .catch(err => console.log(err));
-    }
+        .catch(err => {
+          console.error(err);
+        });
+        }
   }, [fromDate, toDate, year]);
   
   const holidaysBetweenDates = holidays.filter(holidays => {
@@ -145,7 +148,7 @@ function LeaveApplication() {
       const netDays = numbers - holidaysCount;
       setDaysCount(netDays);
     } catch (error) {
-      console.error('Error calculating weeksdays:', error.message)
+      console.error(error.message);
     }
   }, [fromDate, toDate, holidaysCount])
 

@@ -14,6 +14,7 @@ class DBClient {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     }).then(() => {
       console.log('Mongoose connected to database')
       this.connected = true

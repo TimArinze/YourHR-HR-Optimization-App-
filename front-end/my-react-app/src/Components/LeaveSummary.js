@@ -26,10 +26,8 @@ function LeaveSummary() {
       }
     };
     getUser();
-  // eslint-disable-next-line
-  }, []);
-  const isMale = user?.gender === 'Male';
-
+  }, [token]);
+  
 
   useEffect(() => {
     const getLeaveSummary = async () => {
@@ -45,15 +43,21 @@ function LeaveSummary() {
           throw new Error('Failed to fetch leave summary');
         }
         const data = await response.json();
-        setLeaveData(data);
+        const {_id, userId, createdAt, updatedAt, __v, ...leave} = data.documents;
+        // To avoid rendering maternity leave for male employees
+        if (user.gender === 'Male') {
+          const {MaternityLeave, ...rest} = leave;
+          console.log(rest);
+          setLeaveData(rest);
+        } else {
+          setLeaveData(leave);
+        }
       } catch (error) {
         console.error('Error fetching leave summary:', error.message)
       }
     }
     getLeaveSummary();
-  // eslint-disable-next-line
-  }, []);
-
+  }, [user, token]); //dependency so that it waits for user to be set before fetching leave summary
   return (
     <div>
       <table className='leave-table'>
@@ -67,18 +71,17 @@ function LeaveSummary() {
           </tr>
         </thead>
         <tbody>
-          {leaveData.map((item, index) => (
+          {Object.entries(leaveData).map(([leaveType, values], index) => (
             //Conditionally render the "Maternity Leave" row if the user is not male
-            !(isMale && item.type === 'Maternity Leave') && (
-            <tr key={item.type} className={index % 2 === 0 ? 'odd' : 'even'}>
-              <td className='leaveType'>{item.type}</td>
-              <td>{item.total}</td>
-              <td>{item.requested}</td>
-              <td>{item.used}</td>
-              <td>{item.remaining}</td>
+            <tr key={leaveType} className={index % 2 === 0 ? 'odd' : 'even'}>
+              <td className='leaveType'>{leaveType}</td>
+              <td>{values.total}</td>
+              <td>{values.requested}</td>
+              <td>{values.used}</td>
+              <td>{values.remaining}</td>
             </tr>
             )
-          ))}
+          )}
         </tbody>
       </table>
     </div>

@@ -17,12 +17,7 @@ class DBClient {
     //   useCreateIndex: true,
     //   useFindAndModify: false,
     // })
-    Mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    })
+    Mongoose.connect(process.env.MONGO_URI)
     .then(() => {
       console.log('Mongoose connected to database')
       this.connected = true

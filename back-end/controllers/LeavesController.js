@@ -4,7 +4,7 @@ const redisClient = require('../utils/redis')
 const File = require('../models/file')
 const User = require('../models/user')
 const Leave = require('../models/leave')
-const ObjectId = require('mongodb').ObjectId;
+const { ObjectId } = require('mongoose').Types;
 const fs = require('fs');
 
 
@@ -58,7 +58,7 @@ class LeavesController {
     if (!daysCount) {
       return res.status(400).json({error: "Missing daysCount"})
     }
-    const user = await User.findById(ObjectId(userID));
+    const user = await User.findById(new ObjectId(userID));
     if (!user) {
       return res.status(400).json({error: 'Unauthorized'})
     }
@@ -81,10 +81,8 @@ class LeavesController {
           },
           new: true
       }
-      console.log(updateQuery)
       try {
         const update = await Leave.findOneAndUpdate(updateQuery)
-        console.log(update)
         return res.status(201).json({update})
       } catch (err) {
         console.error('Error creating user: ', err);
@@ -104,7 +102,6 @@ class LeavesController {
       }
       try {
         const update = await Leave.findOneAndUpdate(updateQuery)
-        console.log(update)
         return res.status(201).json({update})
       } catch (err) {
         console.error('Error creating user: ', err);
@@ -119,7 +116,7 @@ class LeavesController {
     if (!userID) {
       return res.status(401).json({error: "Unauthorized"})
     }
-    const user = await User.findOne({_id: ObjectId(userID)})
+    const user = await User.findOne({_id: new ObjectId(userID)})
     const documents = await Leave.findOne({userId: user._id})
     if (!documents) {
       return res.status(400).json({error: "No leave found"})

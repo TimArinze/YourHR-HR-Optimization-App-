@@ -5,24 +5,15 @@ const File = require('../models/file')
 
 class DBClient {
   constructor () {
-    this.host = process.env.DB_HOST || 'localhost';
-    this.port = process.env.DB_PORT || 27017;
-    this.database = process.env.DB_DATABASE || 'YourHR';
     this.url = process.env.MONGO_URI;
     this.connected = false;
 
-    // Mongoose.connect(`mongodb://${this.host}:${this.port}/${this.database}`, {
-    //   useNewUrlParser: true,
-    //   useUnifiedTopology: true,
-    //   useCreateIndex: true,
-    //   useFindAndModify: false,
-    // })
-    Mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-      console.log('Mongoose connected to database')
+    Mongoose.connect(this.url)
+    const db = Mongoose.connection
+    db.on('error', console.error.bind(console, 'connection error:'))
+    db.once('open', () => {
       this.connected = true
-    }).catch((err) => {
-      console.error('Mongoose could not connect to database', err)
+      console.log('Database connected!')
     })
   }
 

@@ -4,10 +4,11 @@ require('dotenv').config();
 class RedisClient {
   constructor() {
     // Create a new Redis client
-    this.client = redis.createClient({
-      host: process.env.REDIS_URL || 'localhost' || REDIS_INTERNAL,
-      port: process.env.REDIS_PORT || 6379,
-    });
+    // this.client = redis.createClient({
+    //   host: process.env.REDIS_HOST,
+    //   port: process.env.REDIS_PORT,
+    // });
+    this.client = redis.createClient(process.env.REDIS_EXTERNAL_URL || process.env.REDIS_INTERNAL_URL);
 
     // Log Redis errors to the console
     this.client.on('error', (error) => {
@@ -18,7 +19,7 @@ class RedisClient {
     // isAlive returns true if the connection is Ok or false otherwise
     isAlive() {
       if (this.client.connected) {
-        console.log('Redis is alive')
+        console.log("Redis is alive")
         return true;
       }
       return false;

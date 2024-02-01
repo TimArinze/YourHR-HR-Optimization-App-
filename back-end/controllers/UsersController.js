@@ -1,6 +1,6 @@
 const redisClient = require('../utils/redis');
 const bcrypt = require('bcrypt');
-const ObjectId = require('mongodb').ObjectId;
+const { ObjectId } = require('mongoose').Types;
 const User = require('../models/user')
 const Leave = require('../models/leave')
 
@@ -76,7 +76,7 @@ class UsersController {
     if (!userID) {
       return res.status(401).json({error: "Unauthorized"})
     }
-    const user = await User.findOne({_id: ObjectId(userID)})
+    const user = await User.findOne({_id: new ObjectId(userID)})
     res.json({ email: user.email,
       id: user._id,
       employeeID: user.employeeID,

@@ -25,7 +25,8 @@ function LeaveApplication() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users/me', {
+        // const response = await fetch(`localhost:5000/users/me`, {
+        const response = await fetch(`${process.env.LOCAL_URL}/users/me`, {
           method: 'GET',
           headers: {
             "X-Token": `${token}`,

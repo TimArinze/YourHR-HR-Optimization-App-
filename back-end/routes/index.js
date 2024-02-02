@@ -15,6 +15,7 @@ router.post('/register', UsersController.postNew);
 router.get('/connect', AuthController.getConnect);
 router.get('/disconnect', AuthController.getDisconnect);
 router.get('/users/me', UsersController.getMe);
+router.get('/users', UsersController.getUsers);
 router.post('/files', FilesController.postUpload);
 router.get('/holidays/:year', LeavesController.getHolidays);
 router.post('/leave/apply', LeavesController.postLeave);

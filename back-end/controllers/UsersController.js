@@ -89,6 +89,25 @@ class UsersController {
     })
     return res
   }
+
+  static async getUsers (req, res) {
+    const users = await User.find()
+    const usersList = users.map(user => {
+      return {
+        email: user.email,
+        id: user._id,
+        employeeID: user.employeeID,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        DOB: user.DOB,
+        DOJ: user.DOJ,
+        department: user.department,
+        gender: user.gender
+      }
+    })
+    res.json(usersList)
+    return res
+    }
 }
 
 module.exports = UsersController;

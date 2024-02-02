@@ -3,7 +3,7 @@ require('dotenv').config();
 
 class RedisClient {
   constructor() {
-    this.client = redis.createClient(process.env.REDIS_URL || process.env.REDIS_INTERNAL_URL);
+    this.client = redis.createClient(process.env.REDIS_EXTERNAL_URL || process.env.REDIS_INTERNAL_URL);
     // Log Redis errors to the console
     this.client.on('error', (error) => {
       console.error('Redis Error:', error)

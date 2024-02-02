@@ -4,19 +4,24 @@
   "description": "YourHR backend",
   "main": "server.js",
   "directories": {
-    "test": "test"
+    "test": "tests"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint",
-    "start": "node --exec babel-node --presets @babel/preset-env",
-    "dev": "nodemon --exec babel-node --presets @babel/preset-env",
-    "build": "npm install",
-    "test": "mocha --require@babel/register --exit \"tests/*.test.js\""
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimArinze/YourHR-HR-Optimization-App-.git"
   },
   "author": "Arinze Nwutobo",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimArinze/YourHR-HR-Optimization-App-/issues"
+  },
+  "homepage": "https://github.com/TimArinze/YourHR-HR-Optimization-App-#readme",
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
@@ -24,24 +29,16 @@
     "mime": "^4.0.1",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "sha1": "^1.1.1",
-    "uuid": "^8.3.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
-    "@babel/node": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
-    "@babel/register": "^7.23.7",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "eslint": "^8.56.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jest": "^27.6.3",
+    "babel": "^6.23.0",
+    "babel-node": "^0.0.1-security",
+    "chai": "^5.0.3",
+    "chai-http": "^4.4.0",
     "mocha": "^10.2.0",
-    "nodemon": "^3.0.3",
-    "request": "^2.88.2"
+    "nodemon": "^3.0.3"
   }
 }

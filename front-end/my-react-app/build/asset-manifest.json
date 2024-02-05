@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0e84edbe.css",
+    "main.js": "/static/js/main.52732b0a.js",
+    "static/js/787.38f16daf.chunk.js": "/static/js/787.38f16daf.chunk.js",
+    "static/media/loginBackgroundImage.jpg": "/static/media/loginBackgroundImage.788d38cb76992d1b8a2a.jpg",
+    "static/media/travel.png": "/static/media/travel.b1524584c97587ac3159.png",
+    "static/media/reimbursement.png": "/static/media/reimbursement.e7a35dfb62e0a9d1680b.png",
+    "static/media/recruitment.png": "/static/media/recruitment.e7d7fcd4151f1d7d526a.png",
+    "static/media/employees.png": "/static/media/employees.4237382609a81a56d2ba.png",
+    "static/media/performance.png": "/static/media/performance.200d8f5173e17b859bfd.png",
+    "static/media/leaves.png": "/static/media/leaves.0c2e97997922d313d9f7.png",
+    "static/media/taskbox.png": "/static/media/taskbox.d962707b629f5f32a4f8.png",
+    "static/media/helpdesk.png": "/static/media/helpdesk.62abc70e9b484b575cb1.png",
+    "static/media/attendance.png": "/static/media/attendance.4a48d7ba268701af8d3d.png",
+    "static/media/hr-documents.png": "/static/media/hr-documents.e35a674d1997535f897e.png",
+    "static/media/calendar.png": "/static/media/calendar.b0f158b99c99cc7c26f7.png",
+    "static/media/salary.jpg": "/static/media/salary.82c8cda8914540ebd5a3.jpg",
+    "index.html": "/index.html",
+    "main.0e84edbe.css.map": "/static/css/main.0e84edbe.css.map",
+    "main.52732b0a.js.map": "/static/js/main.52732b0a.js.map",
+    "787.38f16daf.chunk.js.map": "/static/js/787.38f16daf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e84edbe.css",
+    "static/js/main.52732b0a.js"
+  ]
+}

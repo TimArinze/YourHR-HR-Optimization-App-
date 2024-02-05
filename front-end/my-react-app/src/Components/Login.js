@@ -6,6 +6,7 @@ import { useAuth } from '../Utils/auth';
 function Login() {
   const navigate = useNavigate();
   const inputRef = useRef(null);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL_RENDER;
 
   useEffect(() => {
     if (inputRef.current) {
@@ -26,7 +27,7 @@ function Login() {
     const base64Credentials = btoa(credentials);
 
     try {
-      const response = await fetch('http://localhost:5000/connect', {
+      const response = await fetch(`${backendUrl}/connect`, {
         method: 'GET',
         headers: {
           Authorization: `Basic ${base64Credentials}`,

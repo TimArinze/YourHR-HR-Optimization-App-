@@ -4,7 +4,7 @@ import './styles/Registration.css'
 
 function Registration() {
   const navigate = useNavigate();
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -23,6 +23,7 @@ function Registration() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL_RENDER;
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -35,7 +36,7 @@ function Registration() {
   const register = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch(`${backendUrl}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, employeeID, firstName, lastName, DOB, DOJ, department, gender })

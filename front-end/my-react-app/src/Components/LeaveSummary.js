@@ -5,11 +5,12 @@ function LeaveSummary() {
   const token = localStorage.getItem('token');
   const [user, setUser] = useState(null);
   const [leaveData, setLeaveData] = useState([]);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL_RENDER;
   
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users/me', {
+        const response = await fetch(`${backendUrl}/users/me`, {
           method: 'GET',
           headers: {
             "X-Token": `${token}`,
@@ -26,13 +27,13 @@ function LeaveSummary() {
       }
     };
     getUser();
-  }, [token]);
+  }, [token, backendUrl]);
   
 
   useEffect(() => {
     const getLeaveSummary = async () => {
       try {
-        const response = await fetch('http://localhost:5000/leave/summary', {
+        const response = await fetch(`${backendUrl}/leave/summary`, {
           method: 'GET',
           headers: {
             "X-Token": `${token}`,
@@ -57,7 +58,7 @@ function LeaveSummary() {
       }
     }
     getLeaveSummary();
-  }, [user, token]); //dependency so that it waits for user to be set before fetching leave summary
+  }, [user, backendUrl, token]); //dependency so that it waits for user to be set before fetching leave summary
   return (
     <div>
       <table className='leave-table'>

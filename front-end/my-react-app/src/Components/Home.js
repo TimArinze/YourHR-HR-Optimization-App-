@@ -6,6 +6,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 function Home() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const backendUrl = process.env.REACT_APP_BACKEND_URL_RENDER;
   if (!token) {
     navigate('/login')
   }
@@ -14,7 +15,7 @@ function Home() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users/me', {
+        const response = await fetch(`${backendUrl}/users/me`, {
           method: 'GET',
           headers: {
             "X-Token": `${token}`,
@@ -34,7 +35,7 @@ function Home() {
     }
     getUser();
   // eslint-disable-next-line
-  }, [token]);
+  }, [token, backendUrl]);
   if (!user) {
     return <div>Loading...</div>
   }

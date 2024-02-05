@@ -5,14 +5,15 @@ function ListOfHolidays() {
   const currentYear = new Date().getFullYear();
   const [holidays, setHolidays] = useState();
   const [year, setYear] = useState(currentYear);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL_RENDER;
 
   useEffect(() => {
     // eslint-disable-next-line
-    fetch(`http://localhost:5000/holidays/${year}`, { cache: "no-store"})
+    fetch(`${backendUrl}/holidays/${year}`, { cache: "no-store"})
       .then(res => res.json())
       .then(data => setHolidays(data))
       .catch(err => console.log(err));
-  }, [year]);
+  }, [year, backendUrl]);
 
   useEffect(() => {
     console.log(holidays);

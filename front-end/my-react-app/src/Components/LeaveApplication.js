@@ -18,6 +18,7 @@ function LeaveApplication() {
   const [year] = useState(new Date().getFullYear());
 
   const token = localStorage.getItem('token');
+  const backendUrl = process.env.REACT_APP_BACKEND_URL_RENDER;
   if (!token) {
     navigate('/login')
   }
@@ -26,7 +27,7 @@ function LeaveApplication() {
     const getUser = async () => {
       try {
         // const response = await fetch(`localhost:5000/users/me`, {
-        const response = await fetch(`${process.env.LOCAL_URL}/users/me`, {
+        const response = await fetch(`${backendUrl}/users/me`, {
           method: 'GET',
           headers: {
             "X-Token": `${token}`,
@@ -58,8 +59,8 @@ function LeaveApplication() {
     if (firstDate.getFullYear() !== lastDate.getFullYear()) {
       // eslint-disable-next-line
       Promise.all([
-        fetch(`http://localhost:5000/holidays/${year}`, { cache: "no-store"}),
-        fetch(`http://localhost:5000/holidays/${year + 1}`, { cache: "no-store"})
+        fetch(`${backendUrl}/holidays/${year}`, { cache: "no-store"}),
+        fetch(`${backendUrl}/holidays/${year + 1}`, { cache: "no-store"})
       ])
         .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
         .then(([data1, data2]) => setHolidays([...data1, ...data2]))
@@ -67,14 +68,14 @@ function LeaveApplication() {
     }
     else {
       // eslint-disable-next-line
-      fetch(`http://localhost:5000/holidays/${year}`, { cache: "no-store"})
+      fetch(`${backendUrl}/holidays/${year}`, { cache: "no-store"})
         .then(res => res.json())
         .then(data => setHolidays(data))
         .catch(err => {
           console.error(err);
         });
         }
-  }, [fromDate, toDate, year]);
+  }, [fromDate, toDate, year, backendUrl]);
   
   const holidaysBetweenDates = holidays.filter(holidays => {
     const holidayDate = new Date(holidays.date);
@@ -130,7 +131,7 @@ function LeaveApplication() {
     // Implementing logic for submitting the form
     console.log(daysCount, leaveType)
     try {
-      const response = await fetch('http://localhost:5000/leave/apply', {
+      const response = await fetch(`${backendUrl}/leave/apply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

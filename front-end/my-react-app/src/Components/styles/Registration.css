@@ -7,6 +7,7 @@
   background-size: cover;
   background-position: center bottom;
 }
+
 .registersection {
   background-color: aliceblue;
   color: #052c2c;
@@ -14,6 +15,11 @@
   text-align: center;
   margin: auto 80px auto auto;
   border-radius: 2%;
+}
+@media (max-width: 500px) {
+  .registersection {
+    margin: auto;
+  }
 }
 .register-input-box input {
   width: 15rem;

@@ -54,7 +54,7 @@ function LeaveSummary() {
           setLeaveData(leave);
         }
       } catch (error) {
-        console.error('Error fetching leave summary:', error.message)
+        console.error('Error fetching leave summary')
       }
     }
     getLeaveSummary();
